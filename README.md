@@ -34,3 +34,41 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+# Autenticação com Next.js
+
+Este projeto é um estudo sobre como implementar autenticação usando Next.js, Prisma e shadcnui. Ele cobre a configuração do ambiente, a configuração do banco de dados com Prisma, a integração com NextAuth.js para autenticação e o uso de shadcnui para a interface do usuário.
+
+
+
+## Funcionalidades Implementadas
+
+- **Autenticação de Usuário:** Implementação de autenticação de usuário utilizando NextAuth.js para gerenciar sessões de usuário de forma segura.
+  
+- **Persistência de Dados:** Utilização do Prisma ORM para interagir com o banco de dados SQL e armazenar informações de usuário de forma segura e eficiente.
+
+- **Interface de Usuário Responsiva:** Utilização do Shadcnui para construir uma interface de usuário responsiva e moderna.
+
+## Pré-requisitos
+
+- Node.js (versão X.X.X ou superior)
+- npm (ou yarn)
+
+## Instalação
+
+1. Clone o repositório: `git clone https://github.com/seu-usuario/nome-do-repositorio.git`
+2. Instale as dependências: `npm install` ou `yarn install`
+3. Configure as variáveis de ambiente necessárias para o NextAuth.js e o Prisma.
+
+## Como Usar
+
+1. Inicie o servidor de desenvolvimento: `npm run dev` ou `yarn dev`
+2. Acesse o aplicativo em [http://localhost:3000](http://localhost:3000)
+
+## Contribuindo
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request com melhorias. Também sinta-se á vontade para me ensinar melhores práticas de autenticação!
+
+
+
+
