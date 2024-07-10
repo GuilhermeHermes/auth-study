@@ -51,7 +51,7 @@ Este projeto é um estudo sobre como implementar autenticação usando Next.js, 
 
 ## Pré-requisitos
 
-- Node.js (versão X.X.X ou superior)
+- Node.js
 - npm (ou yarn)
 
 ## Instalação
