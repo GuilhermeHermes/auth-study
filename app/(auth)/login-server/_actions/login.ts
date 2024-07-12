@@ -1,24 +1,23 @@
 'use server'
 
 import { signIn } from "@/auth"
-import { AuthError, CredentialsSignin } from "next-auth"
 
-import { Truculenta } from "next/font/google"
-import { redirect } from "next/navigation"
-
-
-
-interface loginProps {
+interface LoginProps {
     email: string,
     password: string,
 }
 
-export default async function login(data: loginProps) {
+export default async function login(data: LoginProps) {
     console.log('data: ', data)
-  
-try{
-    await signIn('credentials', data)
-}catch (error) {
-    redirect('/auth/login-server/error')
-  }
+
+    try {
+        const res = await signIn('credentials', data);
+        console.log('response: ', res);
+        return res;
+    } catch (error) {
+        console.error('Login error: ', error);
+        throw error;
+    }
+
+    
 }

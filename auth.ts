@@ -1,53 +1,55 @@
 
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
-import { ZodError } from "zod"
 import prisma from "./lib/db"
 import {compareSync} from "bcrypt-ts"
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import { PrismaClient } from "@prisma/client"
+import { CredentialsSignin } from "@auth/core/errors"
+import { z } from "zod"
+
+
+const credentialsSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1, "Password is required"),
+})
+
 
 export const { auth, handlers, signIn} = NextAuth({
   providers: [Credentials({
     credentials: {
-        email: {label: "Email", type: "emails" },
-        password: {label: "password", type: "password" },
-  },
-  authorize: async (credentials) => {
-    try {
-      // Log de credenciais recebidas
-      console.log('Received credentials:', credentials.email);
-      console.log('Received credentials:', credentials.password);
-      const email = credentials.email as string;
-      const password = credentials.password as string;
+      email: { label: "Email", type: "email" },
+      password: { label: "Password", type: "password" }
+    },
+    async authorize(credentials) {
+      try {
+        const { email, password } = credentialsSchema.parse(credentials)
 
-      if (!email || !password) {
-        return null;
+        const user = await prisma.user.findUnique({
+          where: { email }
+        })
+
+        if (!user || !user.password) {
+          throw new CredentialsSignin("Invalid credentials")
+        }
+        console.log('user: ', user)
+        if (!compareSync(password, user.password)) {
+          throw new CredentialsSignin("Invalid credentials")
+        }
+
+        return { id: user.id, name: user.name, email: user.email }
+      } catch (error) {
+        if (error instanceof z.ZodError) {
+          throw new CredentialsSignin("Invalid input")
+        }
+        if (error instanceof CredentialsSignin) {
+          
+          throw error
+        }
+        console.error(error)
+        return null
       }
-
-
-      const user = await prisma.user.findUnique({
-        where: {email:email}
-      })
-      console.log('user: ', user)
-      if (!user) {
-
-        throw new Error("User not found.")
-
-      }
-      
-    
-    
-      if(compareSync(password, user.password ?? '')){
-        return {id: user.id, name: user.name, email: user.email}
-      }else{
-        throw new Error("Credentials do not match")
-      }
-
-      
-    }catch (error) {
-            console.error(error) 
-            throw new Error('Failed to login')
-    }
-        },
-}),
-  ]
+    },
+  }),
+],
 })

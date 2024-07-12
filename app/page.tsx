@@ -16,6 +16,9 @@ export default function Home() {
       <LoginButton route="/login-server">
       <Button variant='outline'>Login server components</Button>
       </LoginButton>
+      <LoginButton route="/client-login">
+      <Button variant='outline'>Login client components</Button>
+      </LoginButton>
     </div>
   </main>
   );
