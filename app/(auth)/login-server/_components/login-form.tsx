@@ -17,13 +17,14 @@ import { Button } from "@/components/ui/button"
 import { FormError } from "@/components/form-error"
 import { FormSuccess } from "@/components/form-success"
 import login from "@/app/(auth)/login-server/_actions/login"
-import { useState } from "react"
+import {  useState } from "react"
 import { CardWrapper } from "@/components/auth/card-wrapper"
+import { useRouter } from "next/navigation"
 
 export const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
-
+  const router = useRouter();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -39,7 +40,8 @@ export const LoginForm = () => {
     try {
       await login(data)
       setSuccessMessage("Login successful!")
-
+      router.push("/dashboard")
+      
       
       // Exibir mensagem de sucesso ou redirecionar o usuário, por exemplo
     } catch (error: any) {

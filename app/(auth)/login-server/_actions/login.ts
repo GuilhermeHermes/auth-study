@@ -1,5 +1,4 @@
 'use server'
-
 import { signIn } from "@/auth"
 
 interface LoginProps {
@@ -13,11 +12,10 @@ export default async function login(data: LoginProps) {
     try {
         const res = await signIn('credentials', data);
         console.log('response: ', res);
-        return res;
     } catch (error) {
         console.error('Login error: ', error);
         throw error;
     }
 
-    
+   
 }

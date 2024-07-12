@@ -1,6 +1,7 @@
 
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
+import GitHub from "next-auth/providers/github"
 import prisma from "./lib/db"
 import {compareSync} from "bcrypt-ts"
 import { PrismaAdapter } from "@auth/prisma-adapter"
@@ -15,8 +16,9 @@ const credentialsSchema = z.object({
 })
 
 
-export const { auth, handlers, signIn} = NextAuth({
-  providers: [Credentials({
+export const { auth, handlers, signIn, signOut} = NextAuth({
+  providers: [
+    Credentials({
     credentials: {
       email: { label: "Email", type: "email" },
       password: { label: "Password", type: "password" }
@@ -50,6 +52,6 @@ export const { auth, handlers, signIn} = NextAuth({
         return null
       }
     },
-  }),
+  }),GitHub,
 ],
 })

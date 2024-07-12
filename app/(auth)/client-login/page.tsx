@@ -2,14 +2,10 @@
 
 import { useSession } from "next-auth/react";
 import LoginFormClient from "./_components/login-form-client";
-import {
-    Alert,
-    AlertDescription,
-    AlertTitle,
-  } from "@/components/ui/alert"
-  import { FaSpinner } from 'react-icons/fa';
+
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import AlertChangePage from "@/components/alerts/changePage";
 
   
 export default function LoginClient() {
@@ -28,14 +24,7 @@ export default function LoginClient() {
 
     if(session.status === "authenticated") {
         return (
-            <Alert>
-            <FaSpinner className="animate-spin h-4 w-4" />
-            <AlertTitle>Authenticated!</AlertTitle>
-            <AlertDescription>
-              Wait a moment... redirecting
-            </AlertDescription>
-          </Alert>
-          
+            <AlertChangePage title="Authenticated!" description="Wait a moment... redirecting" />
         )
     }
     console.log('session: ', session)
