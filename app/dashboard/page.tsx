@@ -25,8 +25,8 @@ const DashboardPage: React.FC = async () => {
             <section className="flex-1 p-6">
                 <header className="flex justify-between items-center mb-8">
                     <h1 className="text-3xl font-semibold">Dashboard Overview</h1>
-                    <div className='flex'>
-                    <p className='mr-2' >Welcome back, {session && session.user?.name}!</p>
+                    <div className='flex gap-3'>
+                    <p className='' >Welcome back, {session && session.user?.name}!</p>
                     {session.user?.image && <Image src={session && session.user?.image || ''} alt="User profile image" width={40} height={20} className="rounded-full mr-3 ml-3" />}
                     <SignOut />
                     </div>
