@@ -19,6 +19,9 @@ export default function Home() {
       <LoginButton route="/client-login">
       <Button variant='outline'>Login client components</Button>
       </LoginButton>
+      <LoginButton route="/register">
+      <Button variant='outline'>Register</Button>
+      </LoginButton>
     </div>
   </main>
   );

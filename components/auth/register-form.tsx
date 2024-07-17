@@ -19,11 +19,12 @@ import { Button } from "@/components/ui/button"
 import {FormError} from "@/components/form-error"
 import {FormSuccess} from "@/components/form-success"
 import register from "@/app/(auth)/register/_actions/register";
+import { useRouter } from "next/navigation";
 
 
 
 export const RegisterForm = () => {
-  
+  const router = useRouter();
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -36,7 +37,9 @@ export const RegisterForm = () => {
   const onSubmit = async (data: z.infer<typeof RegisterSchema>) => {
     try {
         await register(data)
-        // Exibir mensagem de sucesso ou redirecionar o usuário, por exemplo
+     
+        router.push("/dashboard")
+        // Exibir m ensagem de sucesso ou redirecionar o usuário, por exemplo
       } catch (error: any) {
         throw new Error(error.message)
       }

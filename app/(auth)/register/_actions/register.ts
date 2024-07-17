@@ -36,7 +36,7 @@ export default async function register(data: RegisterData){
     },
   })
   console.log('user: ', user)
-  redirect('/')
+
     } catch (error) {
     console.error(error)
     throw new Error('Failed to register')
