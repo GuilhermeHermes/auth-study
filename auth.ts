@@ -4,8 +4,6 @@ import Credentials from "next-auth/providers/credentials"
 import GitHub from "next-auth/providers/github"
 import prisma from "./lib/db"
 import {compareSync} from "bcrypt-ts"
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
 import { CredentialsSignin } from "@auth/core/errors"
 import { z } from "zod"
 
